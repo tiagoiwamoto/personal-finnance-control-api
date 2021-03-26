@@ -10,5 +10,4 @@ package br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.model;
 
 public enum InvestmentType {
     C, V;
-
 }

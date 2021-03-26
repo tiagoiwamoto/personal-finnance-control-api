@@ -9,7 +9,5 @@ package br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.model;
  */
 
 public enum InvestmentTypePaper {
-
     FII, ACAO;
-
 }
