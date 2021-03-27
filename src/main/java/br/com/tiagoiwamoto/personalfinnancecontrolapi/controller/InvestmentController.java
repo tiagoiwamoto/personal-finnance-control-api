@@ -13,8 +13,11 @@ import br.com.tiagoiwamoto.personalfinnancecontrolapi.business.object.Investment
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.controller.vo.InvestmentVO;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.Investment;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,6 +37,17 @@ public class InvestmentController {
     @PostMapping
     public ResponseEntity<ApiDTO<Investment>> create(@RequestBody InvestmentVO investment){
         return ResponseEntity.ok(this.investmentBO.executeSave(investment));
+    }
+
+    @PutMapping(path = "/investment/{id}")
+    public ResponseEntity<ApiDTO<Investment>> update(@RequestBody InvestmentVO investment,
+                                                     @PathVariable(name = "id") Long id){
+        return ResponseEntity.ok(this.investmentBO.executeUpdate(investment, id));
+    }
+
+    @DeleteMapping(path = "/investment/{id}")
+    public ResponseEntity<ApiDTO<Boolean>> delete(@PathVariable(name = "id") Long id){
+        return ResponseEntity.ok(this.investmentBO.executeDelete(id));
     }
 
     @GetMapping

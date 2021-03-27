@@ -18,4 +18,6 @@ public class Constants {
     public static final String CODE_ERROR = "1";
     public static final String CODE_EXCEPTION = "5";
 
+    public static final String BUSINESS_QTY_ERROR = "Você não pode vender mais do que tem";
+
 }
