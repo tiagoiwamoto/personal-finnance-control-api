@@ -17,6 +17,6 @@ import java.util.List;
 
 public interface DividendRepository extends JpaRepository<Dividends, Long> {
 
-    List<Dividends> findAllByPaymentDateBetweenAndFundoImobiliario(LocalDate paymentDate, LocalDate currentDate, FundoImobiliario fii);
+    List<Dividends> findAllByPaymentDateBetweenAndFundoImobiliarioOrderByPaymentDateAsc(LocalDate paymentDate, LocalDate currentDate, FundoImobiliario fii);
 
 }

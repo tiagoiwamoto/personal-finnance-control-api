@@ -43,7 +43,7 @@ public class DividendService {
         Optional<FundoImobiliario> optionalFii = this.fundoImobiliarioRepository.findByCode(investmentName);
         if(optionalFii.isPresent()){
             FundoImobiliario fii = optionalFii.get();
-            List<Dividends> dividends = this.dividendRepository.findAllByPaymentDateBetweenAndFundoImobiliario(localDate, LocalDate.now(), fii);
+            List<Dividends> dividends = this.dividendRepository.findAllByPaymentDateBetweenAndFundoImobiliarioOrderByPaymentDateAsc(localDate, LocalDate.now(), fii);
             List<DividendsDTO> dividendsDTOS = new ArrayList<>();
             List<DividendsPaymentsDTO> dividendsPaymentsDTOS = new ArrayList<>();
 

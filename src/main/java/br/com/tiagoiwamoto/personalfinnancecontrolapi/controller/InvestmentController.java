@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/v1/api/investment")
+@RequestMapping(value = "/v1/api/investments")
 public class InvestmentController {
 
     private final InvestmentBO investmentBO;
