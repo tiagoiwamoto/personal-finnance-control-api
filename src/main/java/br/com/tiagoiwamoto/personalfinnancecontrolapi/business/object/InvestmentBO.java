@@ -12,7 +12,6 @@ import br.com.tiagoiwamoto.iwtlibcore.model.dto.ApiDTO;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.business.service.InvestmentService;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.controller.vo.InvestmentVO;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.Investment;
-import br.com.tiagoiwamoto.personalfinnancecontrolapi.util.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
@@ -31,22 +30,18 @@ public class InvestmentBO {
     }
 
     public ApiDTO<Investment> executeSave(InvestmentVO investment){
-        if(this.investmentService.canSellInvestment(investment)){
-            Investment investmentConverted = new Investment();
-            BeanUtils.copyProperties(investment, investmentConverted);
-            investmentConverted.setCreatedAt(LocalDateTime.now());
-            return this.investmentService.save(investmentConverted);
-        }else{
-            return new ApiDTO<>(Constants.CODE_ERROR, Constants.BUSINESS_QTY_ERROR, null);
-        }
+        Investment investmentMovementConverted = new Investment();
+        BeanUtils.copyProperties(investment, investmentMovementConverted);
+        investmentMovementConverted.setCreatedAt(LocalDateTime.now());
+        return this.investmentService.save(investmentMovementConverted);
 
     }
 
     public ApiDTO<Investment> executeUpdate(InvestmentVO investment, Long id){
-        Investment investmentConverted = new Investment();
-        BeanUtils.copyProperties(investment, investmentConverted);
-        investmentConverted.setId(id);
-        return this.investmentService.update(investmentConverted);
+        Investment investmentMovementConverted = new Investment();
+        BeanUtils.copyProperties(investment, investmentMovementConverted);
+        investmentMovementConverted.setId(id);
+        return this.investmentService.update(investmentMovementConverted);
     }
 
     public ApiDTO<Boolean> executeDelete(Long id){

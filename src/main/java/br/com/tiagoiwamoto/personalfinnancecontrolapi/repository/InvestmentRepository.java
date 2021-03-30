@@ -9,6 +9,7 @@ package br.com.tiagoiwamoto.personalfinnancecontrolapi.repository;
  */
 
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.Investment;
+import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.InvestmentMovement;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -5,35 +5,35 @@ package br.com.tiagoiwamoto.personalfinnancecontrolapi.business.service;
  * tiago.iwamoto@gmail.com
  * linkedin.com/in/tiago-iwamoto
  * System specialist
- * 25/03/2021 | 07:35
+ * 30/03/2021 | 07:33
  */
 
 import br.com.tiagoiwamoto.iwtlibcore.model.dto.ApiDTO;
-import br.com.tiagoiwamoto.personalfinnancecontrolapi.controller.vo.InvestmentVO;
-import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.Investment;
-import br.com.tiagoiwamoto.personalfinnancecontrolapi.repository.InvestmentRepository;
+import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.InvestmentMovement;
+import br.com.tiagoiwamoto.personalfinnancecontrolapi.repository.InvestmentMovementRepository;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.util.Constants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
 @Slf4j
-public class InvestmentService {
+public class InvestmentMovementService {
 
-    private final InvestmentRepository investmentRepository;
+    private final InvestmentMovementRepository investmentMovementRepository;
 
-    public InvestmentService(InvestmentRepository investmentRepository) {
-        this.investmentRepository = investmentRepository;
+    public InvestmentMovementService(InvestmentMovementRepository investmentMovementRepository) {
+        this.investmentMovementRepository = investmentMovementRepository;
     }
 
-    public ApiDTO<Investment> save(Investment investmentMovement){
+    public ApiDTO<InvestmentMovement> save(InvestmentMovement investmentMovement){
         log.info("starting the save() of -> ".concat(this.getClass().getSimpleName()));
+        investmentMovement.setCreatedAt(LocalDateTime.now());
         try{
-            Investment result = this.investmentRepository.save(investmentMovement);
+            InvestmentMovement result = this.investmentMovementRepository.save(investmentMovement);
             log.info("save() successfully executed ".concat(this.getClass().getSimpleName()));
             return new ApiDTO<>(Constants.CODE_SUCCESS, Constants.MSG_SUCCESS_EXECUTED, result);
         }catch (Exception e){
@@ -42,12 +42,12 @@ public class InvestmentService {
         }
     }
 
-    public ApiDTO<Investment> update(Investment investmentMovement){
+    public ApiDTO<InvestmentMovement> update(InvestmentMovement investmentMovement){
         log.info("starting the update() of -> ".concat(this.getClass().getSimpleName()));
         try{
-            Optional<Investment> optionalInvestment = this.investmentRepository.findById(investmentMovement.getId());
+            Optional<InvestmentMovement> optionalInvestment = this.investmentMovementRepository.findById(investmentMovement.getId());
             if(optionalInvestment.isPresent()){
-                Investment result = this.investmentRepository.save(investmentMovement);
+                InvestmentMovement result = this.investmentMovementRepository.save(investmentMovement);
                 log.info("update() successfully executed ".concat(this.getClass().getSimpleName()));
                 return new ApiDTO<>(Constants.CODE_SUCCESS, Constants.MSG_SUCCESS_EXECUTED, result);
             }else{
@@ -64,9 +64,9 @@ public class InvestmentService {
     public ApiDTO<Boolean> delete(Long id){
         log.info("starting delete() of -> ".concat(this.getClass().getSimpleName()));
         try{
-            Optional<Investment> optionalInvestment = this.investmentRepository.findById(id);
+            Optional<InvestmentMovement> optionalInvestment = this.investmentMovementRepository.findById(id);
             if(optionalInvestment.isPresent()){
-                this.investmentRepository.delete(optionalInvestment.get());
+                this.investmentMovementRepository.delete(optionalInvestment.get());
                 log.info("delete() successfully executed ".concat(this.getClass().getSimpleName()));
                 return new ApiDTO<>(Constants.CODE_SUCCESS, Constants.MSG_SUCCESS_EXECUTED, true);
             }else{
@@ -79,13 +79,13 @@ public class InvestmentService {
         }
     }
 
-    public ApiDTO<List<Investment>> recoverAllInvestments(){
+    public ApiDTO<List<InvestmentMovement>> recoverAllInvestments(){
         log.info("starting recover...() of -> ".concat(this.getClass().getSimpleName()));
         try{
-            List<Investment> investmentMovements = this.investmentRepository.findAll();
+            List<InvestmentMovement> investmentMovements = this.investmentMovementRepository.findAll();
             if(investmentMovements.isEmpty()){
                 log.info("recover...() successfully executed but no records found -> ".concat(this.getClass().getSimpleName()));
-                return new ApiDTO<>(Constants.CODE_ERROR, Constants.MSG_ERROR_EXECUTED, null);
+                return new ApiDTO<>(Constants.CODE_ERROR, Constants.MSG_RECOVERY_NOT_FOUND, null);
             }else{
                 log.info("recover...() successfully executed -> ".concat(this.getClass().getSimpleName()));
                 return new ApiDTO<>(Constants.CODE_SUCCESS, Constants.MSG_SUCCESS_EXECUTED, investmentMovements);
@@ -93,29 +93,6 @@ public class InvestmentService {
         }catch (Exception e){
             log.error("não foi possível executar a ação de recovery() -> ".concat(e.getMessage()));
             return new ApiDTO<>(Constants.CODE_EXCEPTION, Constants.MSG_EXCEPTION_EXECUTED, null);
-        }
-    }
-
-    public Boolean canSellInvestment(InvestmentVO investment){
-        try{
-            List<Investment> investmentMovements = this.investmentRepository.findAllByNameOrderByDateEventAsc(investment.getName());
-            AtomicInteger atomicInteger = new AtomicInteger();
-            atomicInteger.set(0);
-            investmentMovements.forEach((Investment item) -> {
-//                if(item.getType() == InvestmentType.C){
-//                    atomicInteger.set(atomicInteger.get() + item.getQty());
-//                }else{
-//                    atomicInteger.set(atomicInteger.get() - item.getQty());
-//                }
-            });
-//            if(investment.getType() == InvestmentType.V && atomicInteger.get() < investment.getQty()){
-//                return false;
-//            } else{
-//                return true;
-//            }
-            return false;
-        }catch (Exception e){
-            return false;
         }
     }
 }

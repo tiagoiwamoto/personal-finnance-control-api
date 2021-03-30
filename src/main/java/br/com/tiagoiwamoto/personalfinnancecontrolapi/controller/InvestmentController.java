@@ -41,7 +41,7 @@ public class InvestmentController {
 
     @PutMapping(path = "/investment/{id}")
     public ResponseEntity<ApiDTO<Investment>> update(@RequestBody InvestmentVO investment,
-                                                     @PathVariable(name = "id") Long id){
+                                                             @PathVariable(name = "id") Long id){
         return ResponseEntity.ok(this.investmentBO.executeUpdate(investment, id));
     }
 
