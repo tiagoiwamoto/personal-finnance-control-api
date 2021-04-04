@@ -98,16 +98,16 @@ public class InvestmentService {
 
     public Boolean canSellInvestment(InvestmentVO investment){
         try{
-            List<Investment> investmentMovements = this.investmentRepository.findAllByNameOrderByDateEventAsc(investment.getName());
-            AtomicInteger atomicInteger = new AtomicInteger();
-            atomicInteger.set(0);
-            investmentMovements.forEach((Investment item) -> {
+//            List<Investment> investmentMovements = this.investmentRepository.findAllByNameOrderByDateEventAsc(investment.getName());
+//            AtomicInteger atomicInteger = new AtomicInteger();
+//            atomicInteger.set(0);
+//            investmentMovements.forEach((Investment item) -> {
 //                if(item.getType() == InvestmentType.C){
 //                    atomicInteger.set(atomicInteger.get() + item.getQty());
 //                }else{
 //                    atomicInteger.set(atomicInteger.get() - item.getQty());
 //                }
-            });
+//            });
 //            if(investment.getType() == InvestmentType.V && atomicInteger.get() < investment.getQty()){
 //                return false;
 //            } else{

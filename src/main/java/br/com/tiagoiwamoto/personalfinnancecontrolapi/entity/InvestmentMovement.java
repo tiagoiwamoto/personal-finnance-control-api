@@ -35,6 +35,8 @@ public class InvestmentMovement {
     @JoinColumn(name = "investment_id")
     private Investment investment;
     private InvestmentType type;
+    private Integer qty;
+    private Double value;
     private Double taxB3;
     private Double taxCorretagem;
     private LocalDate dateEvent;
@@ -46,6 +48,8 @@ public class InvestmentMovement {
         sb.append("id=").append(id);
         sb.append(", investment=").append(investment);
         sb.append(", type=").append(type);
+        sb.append(", qty=").append(qty);
+        sb.append(", value=").append(value);
         sb.append(", taxB3=").append(taxB3);
         sb.append(", taxCorretagem=").append(taxCorretagem);
         sb.append(", dateEvent=").append(dateEvent);
@@ -53,4 +57,5 @@ public class InvestmentMovement {
         sb.append('}');
         return sb.toString();
     }
+
 }

@@ -18,6 +18,6 @@ import java.util.Optional;
 public interface InvestmentRepository extends JpaRepository<Investment, Long> {
 
     Optional<Investment> findByName(String name);
-    List<Investment> findAllByNameOrderByDateEventAsc(String name);
+//    List<Investment> findAllByNameOrderByDateEventAsc(String name);
 
 }

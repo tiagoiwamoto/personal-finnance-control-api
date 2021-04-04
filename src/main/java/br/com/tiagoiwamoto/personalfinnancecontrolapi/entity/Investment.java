@@ -17,8 +17,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -31,10 +29,7 @@ public class Investment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private Integer qty;
-    private BigDecimal value;
     private InvestmentTypePaper typeInvest;
-    private LocalDate dateEvent;
     private LocalDateTime createdAt;
 
     @Override
@@ -42,12 +37,10 @@ public class Investment {
         final StringBuilder sb = new StringBuilder("Investment{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
-        sb.append(", qty=").append(qty);
-        sb.append(", value=").append(value);
         sb.append(", typeInvest=").append(typeInvest);
-        sb.append(", dateEvent=").append(dateEvent);
         sb.append(", createdAt=").append(createdAt);
         sb.append('}');
         return sb.toString();
     }
+
 }

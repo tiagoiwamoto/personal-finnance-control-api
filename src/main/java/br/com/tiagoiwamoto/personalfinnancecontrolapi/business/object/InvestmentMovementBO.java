@@ -11,8 +11,6 @@ package br.com.tiagoiwamoto.personalfinnancecontrolapi.business.object;
 import br.com.tiagoiwamoto.iwtlibcore.model.dto.ApiDTO;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.business.service.InvestmentMovementService;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.controller.vo.InvestmentMovementVO;
-import br.com.tiagoiwamoto.personalfinnancecontrolapi.controller.vo.InvestmentVO;
-import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.Investment;
 import br.com.tiagoiwamoto.personalfinnancecontrolapi.entity.InvestmentMovement;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
